@@ -1,15 +1,29 @@
-# MultiRC: Reasoning over Mulitple Sentences [![Build Status](https://semaphoreci.com/api/v1/projects/bcb461fa-0d0f-4580-ad3b-4d39afa861c9/1308311/badge.svg)](https://semaphoreci.com/danyaljj/hard-qa)
+# MultiRC: Reasoning over Mulitple Sentences 
 
-This repo contains the necessary code for a few baselines and evaluation reported used in the paper. To read more details on the paper, refer to [this page](http://cogcomp.org/page/publication_view/831) or [the dataset page](http://cogcomp.org/multirc/). 
+This repo contains a few useful in this work. To read more details on the paper, refer to [this page](http://cogcomp.org/page/publication_view/831) or [the dataset page](http://cogcomp.org/multirc/). 
 
 ## Evaluation 
-The evaluation script used is included in the `eval/` folder. To test the usage, use sample input and outpu files in the folder: 
-```
-python3.5 
+The evaluation script used is included in the `eval/` folder.  
+
+To get F1 measures: 
+
+```bash
+> python eval/multirc-eval-v1.py 
+Per question measures (i.e. precision-recall per question, then average) 
+        P: 0.825211112777 - R: 0.907502623295 - F1m: 0.864402738925
+Dataset-wide measures (i.e. precision-recall across all the candidate-answers in the dataset) 
+        P: 0.82434611161 - R: 0.906551362683 - F1a: 0.86349665639
 ```
 
-## Baselines 
-The baselines are written in Java/Scala. The code also contains classes for reading the questions. 
+To get a Precision-Recall curve: 
+```bash
+> python eval/multirc-pr-curve-v1.py
+```
+which should give you something like the following: 
+
+
+![](eval/pr-curve-output.png)
+
 
 ## Citation 
 If you use this, please cite the paper: 
