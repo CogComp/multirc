@@ -1,11 +1,12 @@
 import json
 
 # this is the location of your data; has to be downloaded from http://cogcomp.org/multirc/
-inputFile = '/home/data/MultiRC/splitv2/dev_83-fixedIds.json'
+#inputFile = '/home/data/MultiRC/splitv2/dev_83-fixedIds.json'
+inputFile = '/Users/daniel/ideaProjects/hard-qa/split/dev_83.json'
 
 
 def main():
-    eval('../baseline-scores/human-01.json')
+    eval('baseline-scores/human-01.json')
 
 
 def avg(l):
