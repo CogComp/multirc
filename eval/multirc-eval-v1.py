@@ -1,7 +1,6 @@
 import json
 
 # this is the location of your data; has to be downloaded from http://cogcomp.org/multirc/
-#inputFile = '/home/data/MultiRC/splitv2/dev_83-fixedIds.json'
 inputFile = '/Users/daniel/ideaProjects/hard-qa/split/dev_83.json'
 
 
@@ -32,8 +31,6 @@ def eval(outFile):
                 predictCount = sum(predictedAns)
                 correctCount = sum(correctAns)
                 agreementCount = sum([a * b for (a, b) in zip(correctAns, predictedAns)])
-                #p1 = (1.0 * agreementCount / correctCount) if correctCount > 0.0 else 1.0
-                #r1 = (1.0 * agreementCount / predictCount) if predictCount > 0.0 else 1.0
                 p1 = (1.0 * agreementCount / predictCount) if predictCount > 0.0 else 1.0
                 r1 = (1.0 * agreementCount / correctCount) if correctCount > 0.0 else 1.0
                 P1.append(p1)
