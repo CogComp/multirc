@@ -4,14 +4,14 @@ import math
 class Measures:
 
     @staticmethod
-    def per_question_metrics(dataset, outputMap):
+    def per_question_metrics(dataset, output_map):
         P = []
         R = []
         for p in dataset:
             for qIdx, q in enumerate(p["paragraph"]["questions"]):
                 id = p["id"] + "==" + str(qIdx)
-                if (id in outputMap):
-                    predictedAns = outputMap.get(id)
+                if (id in output_map):
+                    predictedAns = output_map.get(id)
                     correctAns = [int(a["isAnswer"]) for a in q["answers"]]
                     predictCount = sum(predictedAns)
                     correctCount = sum(correctAns)
@@ -30,13 +30,13 @@ class Measures:
         return [pAvg, rAvg, f1Avg]
 
     @staticmethod
-    def exact_match_metrics(dataset, outputMap, delta):
+    def exact_match_metrics(dataset, output_map, delta):
         EM = []
         for p in dataset:
             for qIdx, q in enumerate(p["paragraph"]["questions"]):
                 id = p["id"] + "==" + str(qIdx)
-                if (id in outputMap):
-                    predictedAns = outputMap.get(id)
+                if (id in output_map):
+                    predictedAns = output_map.get(id)
                     correctAns = [int(a["isAnswer"]) for a in q["answers"]]
                     em = 1.0 if sum([abs(i - j) for i, j in zip(correctAns, predictedAns)]) <= delta  else 0.0
                     EM.append(em)
@@ -46,15 +46,15 @@ class Measures:
         return Measures.avg(EM)
 
     @staticmethod
-    def per_dataset_metric(dataset, outputMap):
+    def per_dataset_metric(dataset, output_map):
         agreementCount = 0
         correctCount = 0
         predictCount = 0
         for p in dataset:
             for qIdx, q in enumerate(p["paragraph"]["questions"]):
                 id = p["id"] + "==" + str(qIdx)
-                if (id in outputMap):
-                    predictedAns = outputMap.get(id)
+                if (id in output_map):
+                    predictedAns = output_map.get(id)
                     correctAns = [int(a["isAnswer"]) for a in q["answers"]]
                     predictCount += sum(predictedAns)
                     correctCount += sum(correctAns)
