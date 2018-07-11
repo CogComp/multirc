@@ -22,7 +22,7 @@ To get a Precision-Recall curve:
 which should give you something like the following: 
 
 
-![](eval/pr-curve-output.png  | width=100)
+![](eval/pr-curve-output.png)
 
 
 ## Citation 
