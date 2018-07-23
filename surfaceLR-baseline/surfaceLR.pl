@@ -26,8 +26,37 @@ foreach ("t_length_word", "t_length_char", "a_length_word", "a_length_char", "q_
 
 # process each data file, but start with train 
 # (features need to be defined before processing the test sets!)
-foreach my $data ("train", "test_0", "test_1", "test_2", "test_3", "test_4") {
-    process($data."_".($data eq "train"?456:83).".json");
+
+opendir(DIR, ".");
+my @files = readdir(DIR);
+my @devtest = ();
+my $train;
+foreach my $f (@files) {
+    next unless ($f =~ m/\.json/);
+    next if($f =~ m/LRscores/);
+    
+    if($f =~ m/train/) {
+	$train = $f;
+    } else {
+	push @devtest, $f;
+    }
+}
+
+if($train) {
+    print STDERR "Training classifier ...\n";
+    process($train);
+} else {
+    print STDERR "Could not open training data! Please put .JSON training file into this directoy.\n";
+    exit 1;
+}
+if(@devtest) {
+    print STDERR "Evaluating classifier ...\n";	
+    foreach (@devtest) {
+	process($_);
+    }
+} else {
+    print STDERR "Could not open dev/test data! Please put .JSON dev/test file(s) into this directoy.\n";
+    exit 1;    
 }
 
 # process method takes a filename as input 
@@ -40,15 +69,11 @@ sub process($) {
 # processor for JSON
 sub processJSON($) {
     my $filename = shift;
-    my ($data) = ($filename =~ m/(.*)_[^_]*$/);
+    my ($data) = ($filename =~ m/^([^\.]*)/);
 
     # open file 
     open(IN, $filename) or die "Could not open file: $filename!\n";
-    #if(-e "multRC_$data.preds") {
-    #open(PRED, "multRC_$data.preds");
-    #} else {
     open(OUT, ">multRC_$data.feats");
-    #}
     
     my $json;
     while(<IN>) {
@@ -95,9 +120,9 @@ sub processJSON($) {
     close(IN);
 
     if($data =~ m/train/) {
-	`liblinear/train -c 1 -n 20 -B 1 -s 0 multRC_train.feats`;
+	`liblinear/train -c 1 -n 20 -B 1 -s 0 multRC_$data.feats multRC.model`;
     } else {
-	`liblinear/predict -b 1 multRC_$data.feats multRC_train.feats.model multRC_$data.preds`;
+	`liblinear/predict -b 1 multRC_$data.feats multRC.model multRC_$data.preds`;
 	open(PRED, "multRC_$data.preds");	
 	open(IN, $filename) or die "Could not open file: $filename!\n";
 	my $json;
