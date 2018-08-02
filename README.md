@@ -15,15 +15,6 @@ Dataset-wide measures (i.e. precision-recall across all the candidate-answers in
         P: 0.82434611161 - R: 0.906551362683 - F1a: 0.86349665639
 ```
 
-To get a Precision-Recall curve: 
-```bash
-> python eval/multirc-pr-curve-v1.py
-```
-which should give you something like the following: 
-
-
-![](eval/pr-curve-output.png)
-
 
 ## Citation 
 If you use this, please cite the paper: 
