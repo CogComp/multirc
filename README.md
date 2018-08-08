@@ -3,7 +3,7 @@
 This repo contains a few useful in this work. To read more details on the paper, refer to [this page](http://cogcomp.org/page/publication_view/833) or [the dataset page](http://cogcomp.org/multirc/). 
 
 ## Evaluation 
-The evaluation script used is included in the `eval/` folder.  
+The evaluation script used is included in the `multirc_materials/` folder.  
 
 To get F1 measures: 
 
