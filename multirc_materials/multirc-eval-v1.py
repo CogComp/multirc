@@ -3,11 +3,11 @@
 # The predicted answers should be 1s and 0s (no real-valued scores)
 
 import json
-from measures import Measures
+
+from multirc_measures import Measures
 
 # this is the location of your data; has to be downloaded from http://cogcomp.org/multirc/
 inputFile = '/Users/daniel/ideaProjects/hard-qa/splitv1/dev_83-with-lucene.json'
-
 
 measures = Measures()
 
