@@ -6,10 +6,14 @@ if [ ! -f liblinear/train ]; then
     exit
 fi
 
-# run surfaceLR baseline
-perl surfaceLR.pl
-# fix scores in JSON output (string -> double)
-sed -i 's/simpleLR":"\([^"]*\)"/simpleLR":\1/g' *.withLRscores.json
-
+# train surfaceLR baseline
+echo "Training surfaceLR baseline ..."
+perl surfaceLR_train.pl train_456-fixedIds.json
 # remove temporary model/features/prediction files
-rm -f multRC.model *.preds *.feats
+rm -f *.preds *.feats
+
+# run surfaceLR baseline
+echo "Generating surfaceLR predictions ..." 
+perl surfaceLR_predict.pl dev_83-fixedIds.json dev_83-fixedIds.withLRscores.json
+# remove temporary model/features/prediction files
+rm -f *.preds *.feats
