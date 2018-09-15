@@ -15,6 +15,10 @@ Dataset-wide measures (i.e. precision-recall across all the candidate-answers in
         P: 0.82434611161 - R: 0.906551362683 - F1a: 0.86349665639
 ```
 
+## Reasoning categories 
+The collection of question annotations (with their reasoning phenomena) used in this work: 
+[Google Drive Link](https://docs.google.com/spreadsheets/d/1Illoa4FrDFYPWzgNi6rSrRhCKxWYSfyrtUDLLzJgBtM/edit?usp=sharing)
+(see the Section 4 of the aforementioned paper)
 
 ## Citation 
 If you use this, please cite the paper: 
